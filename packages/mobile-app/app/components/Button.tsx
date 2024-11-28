@@ -5,9 +5,10 @@ type Props = {
   label: string;
   theme?: "primary";
   onPress?: () => void;
+  disabled?: boolean;
 };
 
-export default function Button({ label, theme, onPress }: Props) {
+export default function Button({ label, theme, onPress, disabled }: Props) {
   if (theme === "primary") {
     return (
       <View
@@ -16,6 +17,7 @@ export default function Button({ label, theme, onPress }: Props) {
           { borderWidth: 4, borderColor: "#ffd33d", borderRadius: 18 },
         ]}>
         <Pressable
+          disabled={disabled}
           style={[styles.button, { backgroundColor: "#fff" }]}
           onPress={onPress}>
           <FontAwesome
