@@ -3,7 +3,9 @@ const multer = require("multer");
 const { PinataSDK } = require("pinata");
 const dotenv = require("dotenv");
 const path = require("path");
+const axios = require("axios");
 const fs = require("fs");
+const moment = require("moment");
 const upload = multer({
   dest: "uploads/",
 });
@@ -67,6 +69,25 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
   }
 });
 
+app.get("/api/get-file", async (req, res) => {
+  const { cid } = req.query;
+
+  if (!cid) {
+    return res.status(400).json({ error: "CID is required" });
+  }
+
+  try {
+    const url = await pinata.gateways.createSignedURL({
+      cid,
+      expires: 30,
+    });
+
+    res.json({ image: url });
+  } catch (error) {
+    console.error("Error fetching file from Pinata:", error);
+    res.status(500).json({ error: "Failed to fetch file from Pinata" });
+  }
+});
 // // Upload JSON metadata to IPFS
 // app.post("/upload-metadata", async (req, res) => {
 //   try {
