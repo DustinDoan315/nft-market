@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "packageManager": "yarn@3.6.4",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "multer": "^1.4.5-lts.1",
+    "pinata": "^1.8.1",
+    "pinata-sdk": "^0.1.7"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
